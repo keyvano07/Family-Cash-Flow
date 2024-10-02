@@ -1,0 +1,152 @@
+{{-- SIDEBAR LOGO --}}
+<nav>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">Dana Keluarga</span>
+        </div>
+
+        {{-- DASHBOARD SIDEBAR --}}
+        <div class="sidebar-content">
+            <ul class="lists">
+                <li class="list">
+                    <a href="{{ url('dashboard') }}" class="nav-link">
+                        <span class="bx bx-home-alt icon"></span>
+                        <span class="link">Dashboard</span>
+                    </a>
+                </li>
+                {{-- MENU DATA HARIAN --}}
+                <li class="klik" id="flip-data-harian">
+                    <a href="#" class="nav-link">
+                        <i class="bx bx-bar-chart-alt-2 icon"></i>
+                        <span class="link">Data Harian</span>
+                        <i class="bx bx-chevron-right float-right"></i>
+                    </a>
+                </li>
+                <div class="panel-controler" id="panel-controler-data-harian">
+                    {{-- SUB MENU DARI DATA HARIAN --}}
+                    <li id="panel-pemasukan" class="panel" style="display: none;">
+                        <a href="{{ route('view-pemasukan') }}" class="linkAktif">
+                            <div>
+                                <span><i class="fas fa-file-invoice-dollar"></i></span>
+                                <span>Data Pemasukkan</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li id="panel-pengeluaran" class="panel" style="display: none;">
+                        <a href="{{ route('view-pengeluaran') }}" class="linkAktif">
+                            <div>
+                                <span><i class="fas fa-hand-holding-usd"></i></span>
+                                <span>Data Pengeluaran</span>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+
+
+                {{-- MENU INPUT DATA --}}
+                <li class="klik" id="flip-input-data">
+                    <a class="nav-link">
+                        <i class="bx bx-plus-circle icon"></i>
+                        <span class="link">Input Data</span>
+                        <i class="bx bx-chevron-right float-right"></i>
+                    </a>
+                </li>
+                {{-- SUB MENU DARI INPUT DATA --}}
+                <div class="panel-controler" id="panel-controler-input-data">
+                    <li id="panel-input-pemasukan" class="panel" style="display: none;">
+                        <a href="{{ route('pemasukan') }}" class="linkAktif">
+                            <div>
+                                <span><i class="fas fa-file-invoice-dollar"></i></span>
+                                <span>Input Pemasukkan</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li id="panel-input-pengeluaran" class="panel" style="display: none;">
+                        <a href="{{ route('pengeluaran') }}" class="linkAktif">
+                            <div>
+                                <span><i class="fas fa-hand-holding-usd"></i></span>
+                                <span>Input Pengeluaran</span>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+
+
+                {{-- MENU LAPORAN --}}
+                <li class="klik" id="flip-input-data">
+                    <a href="{{ url('laporan') }}" class="nav-link">
+                        <div>
+                            <span><box-icon name='report' type='solid' color='#707070'></box-icon></span>
+                            <span class="link">Laporan</span>
+                        </div>
+                    </a>
+                </li>
+
+
+                {{-- MENU SETINGS --}}
+                <div class="bottom-cotent">
+                    <li class="list">
+                        <a href="#" class="nav-link">
+                            <i class="bx bx-cog icon"></i>
+                            <span class="link">Settings</span>
+                        </a>
+                    </li>
+                    {{-- MENU LOGOUT --}}
+                    <li class="list">
+                        <a href="#" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Logout</span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="overlay"></section>
+
+
+<script>
+    // Mengambil elemen-elemen yang diperlukan
+    const navBar = document.querySelector("nav"),
+        menuBtns = document.querySelectorAll(".menu-icon"),
+        overlay = document.querySelector(".overlay");
+
+    // Menambahkan event listener untuk setiap tombol menu-icon
+    menuBtns.forEach((menuBtn) => {
+        menuBtn.addEventListener("click", () => {
+            navBar.classList.toggle("open"); // Menampilkan atau menyembunyikan sidebar
+        });
+    });
+
+    // Menambahkan event listener untuk overlay
+    overlay.addEventListener("click", () => {
+        navBar.classList.remove("open"); // Menyembunyikan sidebar ketika overlay diklik
+    });
+
+    // Fungsi untuk toggle submenu "Data Harian"
+    document.getElementById('flip-data-harian').addEventListener('click', function() {
+        const panels = document.querySelectorAll('#panel-controler-data-harian .panel');
+        panels.forEach(panel => {
+            panel.style.display = panel.style.display === 'none' ? 'block' :
+                'none'; // Menampilkan atau menyembunyikan panel
+        });
+        // Mengubah arah ikon chevron
+        const chevron = this.querySelector('.bx-chevron-right');
+        chevron.classList.toggle('bx-chevron-down'); // Toggle class untuk mengubah arah ikon
+    });
+
+    // Fungsi untuk toggle submenu "Input Data"
+    document.getElementById('flip-input-data').addEventListener('click', function() {
+        const panels = document.querySelectorAll('#panel-controler-input-data .panel');
+        panels.forEach(panel => {
+            panel.style.display = panel.style.display === 'none' ? 'block' :
+                'none'; // Menampilkan atau menyembunyikan panel
+        });
+        // Mengubah arah ikon chevron
+        const chevron = this.querySelector('.bx-chevron-right');
+        chevron.classList.toggle('bx-chevron-down'); // Toggle class untuk mengubah arah ikon
+    });
+</script>
